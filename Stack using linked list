@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node 
+{
+	int info;
+	struct node* link;
+};
+struct node* start = NULL;
+void createList()
+{
+	if (start == NULL) 
+	{
+		int n;
+		printf("\nEnter the number of nodes: ");
+		scanf("%d", &n);
+		if (n != 0)
+		{
+			int data;
+			struct node* newnode;
+			struct node* temp;
+			newnode = malloc(sizeof(struct node));
+			start = newnode;
+			temp = start;
+			printf("\nEnter number to be inserted : ");
+			scanf("%d", &data);
+			start->info = data;
+			for (int i = 1; i <n; i++) 
+			{
+				newnode = malloc(sizeof(struct node));
+				temp->link = newnode;
+				printf("\nEnter number to"
+					" be inserted : ");
+				scanf("%d", &data);
+				newnode->info = data;
+				temp = temp->link;
+			}
+		}
+		printf("\nThe list is created\n");
+	}
+	else
+		printf("\nThe list is already created\n");
+}
+void traverse()
+{
+	struct node* temp;
+	if (start == NULL)
+		printf("\nList is empty\n");
+	else 
+	{
+		temp = start;
+		while (temp != NULL)
+		{
+			printf("%d\t", temp->info);
+			temp = temp->link;
+		}
+		printf("\n");
+	}
+}
+void insertAtFront()
+{
+	int data;
+	struct node* temp;
+	temp = malloc(sizeof(struct node));
+	printf("\nEnter number to"
+		" be inserted : ");
+	scanf("%d", &data);
+	temp->info = data;
+	temp->link = start;
+	start = temp;
+}
+void deleteFirst()
+{
+	struct node* temp;
+	if (start == NULL)
+		printf("\nList is empty\n");
+	else {
+		temp = start;
+		start = start->link;
+		free(temp);
+	}
+}
+int main()
+{
+    createList();
+	int choice;
+	while (1) 
+	{
+		printf("\t1. Push\n");
+		printf("\t2. Pop\n");
+		printf("\t3. Display\n");
+		printf("\t4. Exit\n");
+		printf("\nEnter Choice =\n");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 1:
+			insertAtFront();
+		break;
+		case 2:
+			deleteFirst();
+		break;
+		case 3:
+		    traverse();
+	    break;
+		case 4:
+			exit(1);
+			break;
+		default:
+			printf("\nIncorrect Choice\n");
+		}
+	}
+	return 0;
+}
