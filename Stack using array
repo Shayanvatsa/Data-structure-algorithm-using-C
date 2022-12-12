@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+void push(int item);
+int pop();
+void display();
+int arr[50],size;
+int top=0,item;
+void main()
+{
+    int ch;
+    printf("\nEnter size of stack=");
+    scanf("%d",&size);
+    while(1)
+    {
+        printf("\n1. Push\n2. Pop\n3. Display\n4. Exit");
+        printf("\nEnter choice=");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+                    printf("\nEnter item to be inserted=");
+                    scanf("%d",&item);
+                    push(item);
+            break;
+            case 2:
+                    pop();
+            break;
+            case 3:
+                    display();
+            break;
+            case 4:
+                    exit(0);
+            break;
+            default:
+                    printf("\nInvalid Choice\n");
+        }
+                
+        }
+}
+void push(int item)
+{
+    if(top>=size)
+    printf("\nStack Overflow\n");
+    else
+    {
+        top++;
+        arr[top]=item;
+    }
+}
+int pop()
+{
+    int item;
+    if(top<size)
+    {
+        printf("\nStack is empty\n");
+        return 0;
+    }
+    else
+    {
+        item=arr[top];
+        top--;
+        return item;
+    }
+}
+void display()
+{
+    printf("\n The stack is:-\n");
+    for(int i=1;i<(top+1);i++)
+    {
+        printf("%d\t",arr[i]);
+    }
+    printf("\n\n");
+}
